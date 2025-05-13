@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,7 +10,21 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        drawCircle: {
+          "0%": {
+            strokeDashoffset: 100,
+          },
+          "100%": {
+            strokeDashoffset: 0,
+          },
+        },
+      },
+      animation: {
+        "draw-circle": "drawCircle 2s ease-out forwards",
+      },
+    },
   },
   plugins: [],
 };

@@ -1,6 +1,5 @@
 "use client";
 
-import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   Navbar,
   NavBody,
@@ -12,8 +11,7 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
-import { useState } from "react";
-import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
@@ -33,11 +31,34 @@ export function NavbarDemo() {
     },
   ];
 
-  const { theme } = useTheme();
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const html = document.documentElement;
+    if (html.classList.contains("dark")) {
+      html.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setIsDark(false);
+    } else {
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setIsDark(true);
+    }
+  };
+
+  const colorButton = isDark ? "primary" : "dark";
+
+  const titleButtonNav = isDark ? "☀️ Light" : "🌙 Dark";
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const colorButton = theme === "dark" ? "secondary" : "primary";
 
   return (
     <div className="relative w-full">
@@ -47,8 +68,8 @@ export function NavbarDemo() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton variant={colorButton}>
-              <ThemeToggle />
+            <NavbarButton variant={colorButton} onClick={toggleTheme}>
+              {titleButtonNav}
             </NavbarButton>
           </div>
         </NavBody>
@@ -63,10 +84,7 @@ export function NavbarDemo() {
             />
           </MobileNavHeader>
 
-          <MobileNavMenu
-            isOpen={isMobileMenuOpen}
-            // onClose={() => setIsMobileMenuOpen(false)}
-          >
+          <MobileNavMenu isOpen={isMobileMenuOpen}>
             {navItems.map((item, idx) => (
               <a
                 key={`mobile-link-${idx}`}
@@ -78,19 +96,8 @@ export function NavbarDemo() {
               </a>
             ))}
             <div className="flex w-full flex-col gap-4">
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Login
-              </NavbarButton>
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Book a call
+              <NavbarButton variant={colorButton} onClick={toggleTheme}>
+                {titleButtonNav}
               </NavbarButton>
             </div>
           </MobileNavMenu>
@@ -104,28 +111,59 @@ export function NavbarDemo() {
 }
 
 const DummyContent = () => {
-  const { theme } = useTheme();
-
-  const textColor = theme === "dark" ? "text-white" : "text-slate:950";
-
-  const words = `Hello Everyone, Introduce me.`;
   return (
-    <div className="container mx-auto p-1 pt-24">
-      <div className="px-8 max-w-5xl text-center mx-auto">
-        <TextGenerateEffect duration={2} words={words} textColor={textColor} />
+    <div className="container mx-auto p-1 pt-24 relative">
+      {/* Curved yellow background */}
+      <div
+        // className="absolute inset-0 top-0 w-full h-[500px] bg-yellow-400 dark:bg-amber-500
+        // rounded-b-[50%] transform -translate-y-1/2 z-0 blur-3xl"
+        className="absolute inset-0 top-0 w-full h-[500px] bg-yellow-400/50 dark:bg-amber-500/20
+        rounded-b-[50%] transform -translate-y-1/2 z-0 blur-3xl"
+        style={{
+          borderRadius: "0 0 100% 100%",
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10">
+        <div className="px-8 max-w-5xl mb-10 text-center mx-auto flex flex-col items-center">
+          <div className="flex items-center justify-center gap-4">
+            <img src="/avatar.png" alt="Avatar" className="w-14 h-14" />
+            <span className="block text-2xl sm:text-3xl font-bold text-slate-800 dark:text-neutral-200">
+              Hello! I'm
+            </span>
+          </div>
+          <div className="mt-3">
+            <span className="block text-4xl sm:text-6xl font-extrabold text-blue-700 dark:text-blue-400 drop-shadow-lg">
+              Muhammad Zulfikri
+            </span>
+          </div>
+        </div>
+        {/* Todo: memperbaiki animasinya. */}
+        <p className="mb-10 text-center text-base sm:text-lg text-slate-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+          A creative{" "}
+          <span className="relative inline-flex items-center">
+            <span className="relative z-10 px-2">web developer</span>
+            <svg
+              className="absolute inset-0 w-full h-full -mx-2"
+              viewBox="0 0 150 50"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M10,30 C10,10 120,10 180,30 C190,50 10,60 10,30"
+                className="stroke-red-500 dark:stroke-red-400 fill-none stroke-[3]"
+                pathLength="100"
+                style={{
+                  strokeDasharray: 100,
+                  animation: "drawCircle 2s forwards",
+                }}
+              />
+            </svg>
+          </span>
+          with a passion for clean design, modern tech. Always building with
+          users in mind.
+        </p>
       </div>
-      <p className="mb-10 text-center text-sm text-zinc-500">
-        Hello everyone, introduce me{" "}
-        <span className="font-medium">Muhammad Zulfikri</span> and me studying
-        at <span className="font-medium">STMIK Kaputama Binjai</span> and am
-        currently studying in the 5th semester, Faculty of{" "}
-        <span className="font-medium">Computer Science</span> majoring in
-        Informatics Engineering. And I am currently working at{" "}
-        <span className="font-medium">
-          PT.Labani Media Nusantara as a Junior Programmer
-        </span>
-        . Maybe that&apos;s just my brief explanation, Thank you!
-      </p>
     </div>
   );
 };
