@@ -11,9 +11,8 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
+import Image from "next/image";
 import { useEffect, useState } from "react";
-
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 export function NavbarDemo() {
   const navItems = [
@@ -128,9 +127,9 @@ const DummyContent = () => {
       <div className="relative z-10">
         <div className="px-8 max-w-5xl mb-10 text-center mx-auto flex flex-col items-center">
           <div className="flex items-center justify-center gap-4">
-            <img src="/avatar.png" alt="Avatar" className="w-14 h-14" />
+            <Image src="/avatar.png" height={60} width={60} alt="Avatar" />
             <span className="block text-2xl sm:text-3xl font-bold text-slate-800 dark:text-neutral-200">
-              Hello! I'm
+              Hello! I&apos;m
             </span>
           </div>
           <div className="mt-3">
@@ -143,7 +142,7 @@ const DummyContent = () => {
         <p className="mb-10 text-center text-base sm:text-lg text-slate-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
           A creative{" "}
           <span className="relative inline-flex items-center">
-            <span className="relative z-10 px-2">web developer</span>
+            <span className="relative z-10 px-2">Web Developer</span>
             <svg
               className="absolute inset-0 w-full h-full -mx-2"
               viewBox="0 0 150 50"
