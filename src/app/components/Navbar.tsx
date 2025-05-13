@@ -65,7 +65,7 @@ export function NavbarDemo() {
 
           <MobileNavMenu
             isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
+            // onClose={() => setIsMobileMenuOpen(false)}
           >
             {navItems.map((item, idx) => (
               <a
@@ -124,7 +124,7 @@ const DummyContent = () => {
         <span className="font-medium">
           PT.Labani Media Nusantara as a Junior Programmer
         </span>
-        . Maybe that's just my brief explanation, Thank you!
+        . Maybe that&apos;s just my brief explanation, Thank you!
       </p>
     </div>
   );
