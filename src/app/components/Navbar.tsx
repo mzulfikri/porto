@@ -17,16 +17,16 @@ import { useEffect, useState } from "react";
 export function NavbarDemo() {
   const navItems = [
     {
-      name: "Features",
-      link: "#features",
+      name: "About",
+      link: "#about",
     },
     {
-      name: "Pricing",
-      link: "#pricing",
+      name: "Experience",
+      link: "#experience",
     },
     {
-      name: "Contact",
-      link: "#contact",
+      name: "Portfolio",
+      link: "#portfolio",
     },
   ];
 
@@ -138,29 +138,9 @@ const DummyContent = () => {
             </span>
           </div>
         </div>
-        {/* Todo: memperbaiki animasinya. */}
         <p className="mb-10 text-center text-base sm:text-lg text-slate-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
-          A creative{" "}
-          <span className="relative inline-flex items-center">
-            <span className="relative z-10 px-2">Web Developer</span>
-            <svg
-              className="absolute inset-0 w-full h-full -mx-2"
-              viewBox="0 0 150 50"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M10,30 C10,10 120,10 180,30 C190,50 10,60 10,30"
-                className="stroke-red-500 dark:stroke-red-400 fill-none stroke-[3]"
-                pathLength="100"
-                style={{
-                  strokeDasharray: 100,
-                  animation: "drawCircle 2s forwards",
-                }}
-              />
-            </svg>
-          </span>
-          with a passion for clean design, modern tech. Always building with
-          users in mind.
+          A creative Web Developer with a passion for clean design, modern tech.
+          Always building with users in mind.
         </p>
       </div>
     </div>
